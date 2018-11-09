@@ -1,0 +1,6 @@
+<div musicRecomment>
+    music works!
+</div>
+<ng-container *ngIf="records.length">
+    <p *ngFor="let item of records">{{item.name}} - {{item.cover}} - {{item.quantity}}</p>
+</ng-container>
