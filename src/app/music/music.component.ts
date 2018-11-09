@@ -14,7 +14,7 @@ interface Record {
 })
 export class MusicComponent implements OnInit {
 
-    private color: string
+    public color: string
     private records: Record[]
 
     constructor(@Optional() protected musicService: MusicService){
@@ -25,9 +25,7 @@ export class MusicComponent implements OnInit {
         })
     }
 
-    ngOnInit() {}
-
-    handleCreate(){
-
+    ngOnInit() {
+        this.color = 'purple'
     }
 }

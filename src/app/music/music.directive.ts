@@ -1,19 +1,22 @@
-import { Directive, AfterViewInit, AfterContentInit, HostListener, Input, ElementRef, Renderer2 } from '@angular/core'
+import { Directive, AfterViewInit, AfterContentInit, HostBinding, HostListener, Input, ElementRef, Renderer2 } from '@angular/core'
 
 @Directive({
-    selector: '[musicRecomment]'
+    selector: '[TextColor]'
 })
 export class MusicDirective implements AfterViewInit, AfterContentInit {
 
-    private color = 'purple'
+    private color = 'lime'
 
     constructor(private element: ElementRef, private renderer: Renderer2){
-        this.setStyle(this.textcolor)
+        this.setStyle(this.color)
         console.log('music directive....')
     }
 
-    @Input('textcolor')            // 输入属性, 用于设置background
+    @Input('TextColor')            // 输入属性, 用于设置background
     textcolor: string
+
+    @HostBinding('style.font-weigth')
+    fontWeigth: string
 
     @HostListener('click', ['HH'])
     handleDelete(){                // 鉴别宿主对象的点击事件
@@ -21,11 +24,14 @@ export class MusicDirective implements AfterViewInit, AfterContentInit {
     }
 
     private setStyle(color: string){
+        this.fontWeigth = 'bold'
         this.renderer.setStyle(this.element.nativeElement, 'color', color)
     }
 
     ngAfterViewInit(){
         console.log('view init after...')
+        console.log(this.renderer)
+        this.renderer.addClass(this.element.nativeElement, 'recomment')
     }
 
     ngAfterContentInit(){

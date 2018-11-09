@@ -7,6 +7,7 @@ import { MusicDirective } from './music.directive'
     // id: 'MusicModle',
     declarations: [MusicDirective],
     imports: [CommonModule],
+    exports: [MusicDirective],
     providers: [LoggerService]
 })
 export class MusicModule {
