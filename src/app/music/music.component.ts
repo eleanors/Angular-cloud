@@ -26,4 +26,8 @@ export class MusicComponent implements OnInit {
     }
 
     ngOnInit() {}
+
+    handleCreate(){
+
+    }
 }

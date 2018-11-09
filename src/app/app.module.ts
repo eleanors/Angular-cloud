@@ -1,35 +1,31 @@
 import { NgModule } from '@angular/core'
-import { RouterModule, Routes } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser'
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 
+// help
+import { JwtIntercepor } from './_helper/auth.interceptor'
+import { ErrorInterceptor } from './_helper/error.interceptor'
+
+// module
+import { MusicModule } from './music/music.module'
+import { MovieModule } from './movie/movie.module'
+import { Router } from './app.router'
+
+// component
 import { AppComponent } from './app.component'
-
 import { MusicComponent } from './music/music.component'
 import { MovieComponent } from './movie/movie.component'
-import { MusicModule } from './music/music.module'
-
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component'
 
-const routes: Routes = [
-    { path: 'music', component: MusicComponent },
-    { path: 'movie/:id', component: MovieComponent },
-    {
-        path: 'movie',
-        component: MovieComponent,
-        data: { title: 'Heroes List' }
-    },
-    {
-        path: '',
-        redirectTo: '/music',
-        pathMatch: 'full'
-    },
-    { path: '**', component: PageNotFoundComponent }
-]
 
 @NgModule({
     declarations: [AppComponent, MusicComponent, MovieComponent, PageNotFoundComponent],
-    imports: [RouterModule.forRoot(routes, { enableTracing: false }), BrowserModule, MusicModule],
-    providers: [],
+    imports: [Router, BrowserModule, MusicModule, MovieModule],
+    providers: [{
+        provide: HTTP_INTERCEPTORS, useClass: JwtIntercepor, multi: true
+    }, {
+        provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true
+    }],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

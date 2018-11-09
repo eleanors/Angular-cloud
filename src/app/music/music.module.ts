@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { LoggerService } from '../logger.service';
+import { LoggerService } from '../logger.service'
 import { MusicDirective } from './music.directive'
 
 @NgModule({
@@ -10,10 +10,9 @@ import { MusicDirective } from './music.directive'
     providers: [LoggerService]
 })
 export class MusicModule {
-
     log: LoggerService
 
-    constructor(log: LoggerService){
+    constructor(log: LoggerService) {
         this.log = log
     }
 }
