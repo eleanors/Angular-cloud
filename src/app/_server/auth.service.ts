@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
+import { BaseService } from '../_server/base.service'
 
 import { map } from 'rxjs/operators'
 import { Observable, BehaviorSubject } from 'rxjs'
@@ -13,8 +14,8 @@ export class AuthService {
     public  authContent: Observable<UserMode>
     private authSubject: BehaviorSubject<UserMode>
 
-    constructor(private http: HttpClient) {
-        this.authSubject = new BehaviorSubject<UserMode>({ id: 1000, username: 'es', token: 'a5ec4n' })
+    constructor(private http: BaseService) {
+        this.authSubject = new BehaviorSubject<UserMode>({ id: 1000, username: 'es', token: 'z5ec4n8u5ek' })
         this.authContent = this.authSubject.asObservable()
     }
 
@@ -22,8 +23,11 @@ export class AuthService {
         return this.authSubject.value
     }
 
-    login(username: string, password: number){
-        return this.http.post<any>('', {username, password})
+    login(username: string, password: number): Observable<any>{
+        return this.http.fetch({
+            method: 'post',
+            url: 'auth/login.json'
+        }, {username, password})
         .pipe(map(user => {
             if(user && user.token){
                 // todo...save data to local
