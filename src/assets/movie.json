@@ -1,0 +1,16 @@
+{
+    "msg": "success",
+    "error": 0,
+    "data": [
+        {
+            "name": "A",
+            "cover": "cover",
+            "quantity": 99
+        },
+        {
+            "name": "B",
+            "cover": "cover",
+            "quantity": 100
+        }
+    ]
+}
