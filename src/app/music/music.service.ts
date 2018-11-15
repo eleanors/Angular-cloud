@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core'
+import { BaseService } from '../_server/base.service'
+import { Observable, Subscription } from 'rxjs'
+import { map } from 'rxjs/operators'
 
 @Injectable({
     providedIn: 'root'
@@ -6,24 +9,23 @@ import { Injectable } from '@angular/core'
 export class MusicService {
 
     private list = []
-    constructor() {
+    constructor(private fetch:BaseService) {
         console.log('music server...')
+        console.log(this.fetch)
     }
 
     create(id: number){
         this.list.push(id)
     }
 
-    async fetch(){
-        let result = [{
-            name: 'A',
-            cover: 'cover',
-            quantity: 99
-        }, {
-            name: 'B',
-            cover: 'cover',
-            quantity: 100
-        }]
-        return result
+    fetchMusicList(): Observable<any> {
+        let result = []
+        return this.fetch.fetch({
+            url: 'assets/movie.json',
+            method: 'get'
+        }).pipe(map(value => {
+            console.log(value.msg)
+            return value.data
+        }))
     }
 }
