@@ -17,7 +17,7 @@ interface fetchParam {
 
 const baseurl = 'http://localhost:4200/'
 
-@Injectable({
+@Injectable({    // ngModule didn't need to reference service again
     providedIn: 'root'
 })
 export class BaseService {
