@@ -1,3 +1,11 @@
+模块，组件，模板，元数据，数据绑定，指令，服务，依赖注入
+
+
+组件类应保持精简，而且组件本身不从服务器获得数据、不进行验证输入，也不直接往控制台写日志。那么这一切改如何处理呢， 它们把这些任务委托给服务
+所谓的元数据，元数据告诉 Angular 如何处理一个类，常用的有@Component，其里面的元数据会告诉 Angular 从哪里获取你为组件指定的主要的构建块
+
+
+
 三种指令：
     组件 、结构型指令（ngif  ngfor等）和属性型指令 （所有组件都为指令）
     结构型指令 —   通过添加和移除 DOM 元素改变 DOM 布局的指令
@@ -28,3 +36,29 @@
     微语法如何展开成<ng-template>。
     写了一个自定义结构型指令 —— UnlessDirective。
     angular默认是单数据绑定   angularjs默认是双数据绑定  。 属性指令意味着标签的左右都为组件的属性 。
+
+
+
+生命周期
+    constructor       构造函数
+
+    ngOnchanges             绑定属性发生变化的时候调用，第一次调用一定在ngOnInit之前。
+    ngOninit                第一轮ngChanges之后调用，本钩子只调用一次。
+    ngDoCheck               在ngOnInit和ngDoCheck之后，会一直检查。
+    ngAfterContentInit      当内容投影进组件之后调用。第一次ngDoCheck之后调用，只调用一次，只适用于组件。父组件调用完成之后，所有子组件才会调用。
+    ngAfterContentChecked   每完成被投影组件内容发生变化时调用。ngAfterContentInit和ngDocheck之后调用，只适用于组件。父组件调用完成之后，所有子组件才会调用。
+    ngAfterViewInit         初始化完成组件试图及其子视图之后调用。第一次ngAfterContentChecked之后调用，只调用一次，只适用于组件。所有子组件调用完成之后，父组件才会调用。此阶段更改属性的值会报错，可在settimeout后运行。
+    ngAfterViewChecked      每次做完组件视图和子组件视图的变更检测之后调用。ngAfterViewInit和ngAfterContentChecked之后调用，只适用于组件。所有子组件调用完成之后，父组件才会调用。此阶段更改属性的值会报错，可在settimeout后运行。
+    ngDoDestory             组件销毁时调用，主要用于内存回收。路由跳转时组件会销毁。
+
+基于指令与组件的区别来分类:
+　　　　1、指令与组件共有的钩子：
+　　　　　　　　ngOnChanges
+　　　　　　　　ngOnInit
+　　　　　　　　ngDoCheck
+　　　　　　　　ngOnDestroy
+　　　　2、组件特有的钩子
+　　　　　　　　ngAfterContentInit
+　　　　　　　　ngAfterContentChecked
+　　　　　　　　ngAfterViewInit
+　　　　　　　　ngAfterViewChecked
