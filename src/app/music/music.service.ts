@@ -28,4 +28,11 @@ export class MusicService {
             return value.data
         }))
     }
+
+    fetchRecommendList(): Promise<any> {
+        return this.fetch.fetch({
+            url: 'assets/movie.json',
+            method: 'get'
+        }).toPromise()
+    }
 }

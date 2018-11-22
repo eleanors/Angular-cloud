@@ -10,20 +10,18 @@ import { Subscriber, Subscription, Subscribable, Subject, Scheduler, Notificatio
 })
 export class AppComponent implements OnInit {
 
+    color: string
     public title = 'Angular'
     protected subscription: Subscription
-    color: string;
 
     constructor(protected route: ActivatedRoute) {
         this.subscription = this.route.queryParams.subscribe((param: any) => {
-
-            if(param.name) {
-
+            if (param.name) {
             }
         })
     }
 
-    ngOnInit(){
+    ngOnInit() {
         console.log('app init...')
     }
 }

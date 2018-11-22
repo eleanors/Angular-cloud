@@ -1,6 +1,17 @@
 <div [TextColor]="color">
     music works!
 </div>
+
 <ng-container *ngIf="records.length">
-    <p *ngFor="let item of records">{{item.name}} - {{item.cover}} - {{item.quantity}}</p>
+    <p *ngFor="let item of records | slice:0:1; let index = index">{{index+1}} {{item.name}} - {{item.cover}} - {{item.quantity}}</p>
 </ng-container>
+
+<h4>class属性全绑定</h4>
+<div [class]="allClass" (click)="handlePress()">AAAA</div>
+
+<h4>class属性部分绑定</h4>
+<div class="aa" [class.bb]="bbValue">AAAA</div>
+
+<div>{{time | date: 'medium'}}</div>
+
+<p>e (0.0-2): {{e | number:'0.0-2'}}</p>
